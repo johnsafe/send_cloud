@@ -1,6 +1,6 @@
 # SendCloud
 
-TODO: Send email by SendCloud
+ Send email by SendCloud
 
 ## Installation
 
@@ -20,7 +20,6 @@ Or install it yourself as:
 
 ## Usage
 
-TODO:
 notes:
 创建列表时，变量为json；操作的返回结果为xml形式
 Step1:
