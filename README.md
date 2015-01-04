@@ -20,12 +20,11 @@ Or install it yourself as:
 
 ## Usage
 
-notes:
+#notes:
 创建列表时，变量为json；操作的返回结果为xml形式
-Step1:
+#initialize
 require 'lib/send_cloud'
 email = SendCloud::EmailRecord.new({:api_user=>'your_name',:api_key=>'your_key'})
-Step2:
 # create a list
 email.list_create({:address=>'test@edm1.com'})
 result:
@@ -50,7 +49,8 @@ email.send_to_user({:subject => 'your subject', :template_invoke_name => 'gx_201
 email.send_to_list({:subject => 'your subject', :template_invoke_name => 'gx_20131227', :from => 'RCCChina <system@rccchina.com>', :fromname => 'RCCChina', :use_maillist => true, :to => 'test@edm1.com'})
 # 普通发送
 email.send_email({:subject=>'普通发送',:html=>'测试普通发送',:from=>'tony.liu@rccchina.com',:to=>'john.li@rccchina.com'})
-# 参考: http://sendcloud.sohu.com/doc/apiGuide.html#apiSend
+# api参考:
+http://sendcloud.sohu.com/doc/apiGuide.html#apiSend
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/send_cloud/fork )
