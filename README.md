@@ -35,7 +35,7 @@ email.list_get({:address=>'test@edm1.com,:start=>'',:limit=>''})
 # delete a list
 email.list_delete({:address=>'test@edm1.com'})
 # add user to list
-# support add users once time
+support add users once time
 email.list_member_add({:mail_list_addr=>'test@edm1.com',:member_addr=>'john.li@rccchina.com;tony.liu@rccchina.com',
                        :name=>'john.li;tony.liu',:vars=>'{i:1};{i:2}'})# search user from list
 # get user from list
