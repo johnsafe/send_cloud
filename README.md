@@ -21,10 +21,11 @@ Or install it yourself as:
 ## Usage
 
 #notes:
-创建列表时，变量为json；操作的返回结果为xml形式
+
 #initialize
 require 'lib/send_cloud'
-email = SendCloud::EmailRecord.new({:api_user=>'your_name',:api_key=>'your_key'})
+支持json和xml两种格式，默认为xml
+email = SendCloud::EmailRecord.new({:api_user=>'your_name',:api_key=>'your_key',:format=>'json'})
 # create a list
 email.list_create({:address=>'test@edm1.com'})
 result:
