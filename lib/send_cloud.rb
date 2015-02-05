@@ -6,29 +6,25 @@ module SendCloud
     require 'net/https'
     require 'uri'
 
-    def initialize(args={:format=>'xml'})
+    def initialize(args={})
+      args[:format]||='xml'
       raise ArgumentError.new('user missing') if args[:api_user].nil?
       raise ArgumentError.new('key missing') if args[:api_key].nil?
-
       self.api_key=args[:api_key];self.api_user=args[:api_user];self.format=args[:format]
     end
 
     def method_missing(method,args)
-      method_array = method.to_s.split('_')
+      # 命名规则：以'_'分割成数组，最后一个元素为动作词，其余的重新以'_'组合成模块名称
+      motion,model = separate_model_and_motion(method)
       args.merge!({:api_user => self.api_user, :api_key => self.api_key})
-      if method_array.size.eql?(2)
-        # 列表操作
-        url = "https://sendcloud.sohu.com/webapi/list.#{method_array.last}.#{self.format}"
-        raise ArgumentError.new('list address missing') if args[:address].nil?
-      elsif method_array.size.eql?(3)
-      #   列表中的member操作
-        url = "https://sendcloud.sohu.com/webapi/list_member.#{method_array.last}.#{self.format}"
-        raise ArgumentError.new('list address missing') if args[:mail_list_addr].nil?
-        raise ArgumentError.new('list member address missing') if args[:member_addr].nil?
-      else
-         raise ArgumentError.new('no method!')
-      end
+      url = "https://sendcloud.sohu.com/webapi/#{model}.#{motion}.#{self.format}"
       post_api(url, args)
+    end
+
+    def separate_model_and_motion(method)
+      method_array = method.to_s.split('_')
+      raise ArgumentError.new('method format is wrong!') if method_array.size<2
+      [method_array.pop,method_array.join('_')]
     end
     # 给列表发送
     def send_to_list(args)
